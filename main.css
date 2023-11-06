@@ -1,0 +1,49 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+header img {
+    position: relative;
+    width: 100%;
+    min-height: 800px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.content {
+    width: 50%;
+    height: 30%;
+    min-width: 250px;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.container {
+    text-align: center;
+}
+
+.text {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    min-width: 200px;
+}
+
+.button {
+    padding: 10px;
+    color: blanchedalmond;
+    background-color: rgb(90, 12, 12);
+    font-size: 18px;
+}
