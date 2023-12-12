@@ -5,26 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Open+Sans&family=Roboto&display=swap"
+        rel="stylesheet">
     <title>movieSearchApp</title>
 </head>
 
 <body>
-    <header>
-        <img src="resourses/BGimage.webp" alt="">
-        <div class="content">
-            <div class="container">
+    <header class="header">
+        <div class="container">
+            <div class="content">
                 <h1>Что будем смотреть сегодня?</h1>
-
-                <input type="text" class="text" id="search" placeholder="Введите название фильма">
-                <button class="button" id="search-btn">Поиск фильма</button>>
-
+                <input type="text" class="input-text" id="search" placeholder="Введите название фильма">
+                <button class="button" id="search-btn">Поиск фильма</button>
+                <div class="search-error hidden">Возможно вы ввели некорректные данные. Попробуйте еще раз</div>
             </div>
+            <ul class="list hidden">
+                <!-- тут отобразится список фильмов с сервера -->
+            </ul>
         </div>
     </header>
 
 
-    <script src="api.js"></script>
-    <script src="movies.js"></script>
+
+    <script type="module" src="movies.js"></script>
 </body>
 
 </html>
