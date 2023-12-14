@@ -19,19 +19,20 @@ async function findMovies(movieTitle) {
     }
     
 }
-// findMovies()
+
 
 //получаем вводимые данные из инпута и отправляем его в поиск на сервер
-function searchMovie() { 
+function searchMovie(e) { 
     let movieTitle = inputNode.value.trim();
     if(!movieTitle) {
         return messageErrorNode.classList.remove('hidden')
     } else {
         messageErrorNode.classList.add('hidden')
+        inputNode.focus()
     }
     findMovies(movieTitle);
-    ulList.classList.remove('hidden')
-    
+    ulList.classList.remove('hidden');
+    inputNode.value = ''
 }
 
 
@@ -45,22 +46,24 @@ function showMovies(movies){
             movieImg = movie.Poster
         }
         moviesList += `
-        <li>
-            <div>
-            <img src = ${movie.Poster};
-            </div>
-            <div>
-            <h1>${movie.Title}</h1>
-            <p>${movie.Type}</p>
-            <p>${movie.Year}</p>
-            </div>
+        <li class='list-style'>
+                <img src='${movie.Poster}' class='movie-img-style'</img>
+                <div class="movie-content">
+                    <h1 class='movie-title-style'>${movie.Title}</h1>
+                    <p>${movie.Type}</p>
+                    <p>${movie.Year}</p>
+                </div>
         </li>
         `
     })
     ulList.innerHTML = moviesList;
 }
 
-
+// чистим инпут и возвращаем  фокус 
+function clearAndFocusInput() { 
+    movieTitle.value = '';
+    movieTitle.focus();
+}
 
 
 

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Open+Sans&family=Roboto&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="resourses/faviconM.svg" type="image/svg+xml">
     <title>movieSearchApp</title>
 </head>
 
@@ -21,12 +22,22 @@
                 <button class="button" id="search-btn">Поиск фильма</button>
                 <div class="search-error hidden">Возможно вы ввели некорректные данные. Попробуйте еще раз</div>
             </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
             <ul class="list hidden">
                 <!-- тут отобразится список фильмов с сервера -->
             </ul>
         </div>
-    </header>
-
+    </main>
+    <footer class="footer">
+        <div class="container container-footer-nav">
+            <nav class="footer-nav">
+                <a class="footer-nav-a" href="https://t.me/Mat_Kovsky">TG для связи</a>
+            </nav>
+        </div>
+    </footer>
 
 
     <script type="module" src="movies.js"></script>

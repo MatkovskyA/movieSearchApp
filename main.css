@@ -19,8 +19,8 @@ h1 {
 }
 
 .container {
-    margin: 20% auto;
-    max-width: 700px;
+    margin: 10% auto;
+    max-width: 1000px;
     text-align: center;
     padding: 0 15px;
 }
@@ -64,6 +64,7 @@ h1 {
 
 .list {
     padding: 0;
+    width: 100%;
 }
 
 .list-movie {
@@ -77,14 +78,93 @@ h1 {
     max-height: 200px;
 }
 
-li {
+.list-style {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
     list-style: none;
     color: white;
     padding: 20px;
     background-color: #ffc2c2;
+    opacity: 0.97;
     border-radius: 10px;
+    margin: 10px 0;
+}
+
+.movie-img-style {
+    max-width: 150px;
+    height: 100%;
+    opacity: 1;
+}
+
+.movie-content {
+    text-align: left;
 }
 
 .hidden {
     display: none;
+}
+
+
+
+
+
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .input-text {
+        margin-bottom: 10px;
+    }
+
+    .movie-title-style {
+        font-size: 14px;
+    }
+
+    .movie-img-style {
+        max-width: 100px;
+    }
+
+    .movie-content {
+        text-align: center;
+    }
+
+}
+
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+    padding: 15px 0;
+    justify-content: right;
+    left: 0;
+    right: 20px;
+}
+
+.footer-nav-a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
+    position: relative;
+    text-shadow: 0px 0px 10px black
+}
+
+.footer-nav-a::after {
+    content: '';
+    background-image: url(resourses/tg.svg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50%;
+    height: 30px;
+    top: -40px;
+    right: 15px;
+    background-color: azure;
+    border-radius: 50%;
+    padding: 3px;
 }
