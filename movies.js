@@ -3,6 +3,8 @@ const btnSearchNode = document.querySelector(".button");
 let inputNode = document.querySelector('.input-text');
 const messageErrorNode = document.querySelector('.search-error');
 const ulList = document.querySelector('.list');
+const movieCardInfo = document.querySelector('.movie-card');
+const btnMovieCardBack = document.querySelector('.btn-back');
 
 
 btnSearchNode.addEventListener('click', searchMovie)
@@ -43,12 +45,12 @@ function showMovies(movies){
     movies.map(movie => {
         let movieImg = 'resourses/block.jpeg';
         if(movie.Poster !== "N/A;") {
-            movieImg = movie.Poster
+            movieImg = movie.Poster;
         }
         moviesList += `
         <li>
-            <a href="movie.html?id=${movie.imdbID}" class='list-style'>
-                <img src='${movie.Poster}' class='movie-img-style'</img>
+            <a href="" class='list-style'>
+                <img src='${movie.Poster}' class='movie-img-style' alt='movie image'</img>
                 <div class="movie-content">
                     <h1 class='movie-title-style'>${movie.Title}</h1>
                     <p>${movie.Type}</p>
@@ -59,14 +61,60 @@ function showMovies(movies){
         `
     })
     ulList.innerHTML = moviesList;
+    getMovieCard()
 }
 //-------------------------------------------------------
 // ДОДЕЛАТЬ - ОСТАНОВИЛСЯ НА ПОЛУЧЕНИИ ID ФИЛЬМА!!!
+// получаем информацию о фильме по id
+function getMovieCard(e) {
+    const movieListCard = ulList.querySelectorAll('.list-style');
+    movieListCard.forEach((movie) => {
+        movie.addEventListener('click', async () => {
+            // ulList.classList.remove('hidden');
+            const res = await fetch(`https://www.omdbapi.com/?i=${movie.id}&apikey=7e07b9f6`)
+            const movieCard = await res.json();
+            
+            // movieCardInfo.classList.remove('.hidden')
+            showMovieCard(movieCard)
+            
+        })
+        
+    })
+}
+// функция отображает карточку фильма со всей информацией
 
-// async function getMovieCard(id) {
-//     const res = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=7e07b9f6`);
+function showMovieCard(movie) {
+    let movieCardInfo = '';
+    movieCardInfo.innerHTML = `
+    <button class="btn-back"></button>
+    <div class="movie-card-info">
+        <img src='${movie.Poster}' class='movie-img-style' alt='movie image'</img>
+        <div class="movie-card-about">
+            <h3 class="movie-card-title">${movie.Title}</h3>
+            <p class="movie-card-year">${movie.Year}</p>
+            <p class="movie-card-rating">${movie.Rated}</p>
+            <p class="movie-card-release">${movie.Released}</p>
+            <p class="movie-card-duration">${movie.Runtime}</p>
+            <p class="movie-card-genre">${movie.Genre}</p>
+            <p class="movie-card-director">${movie.Director}</p>
+            <p class="movie-card-scenario">${movie.Scenario}</p>
+            <p class="movie-card-actors">${movie.Actors}</p>
+        </div>
+    </div>
+    <div class="movie-card-description">
+        <p class:"plot">${movie.Plot}</p>
+    </div>
+    `
+}
+// async function findMovies(movieTitle) {
+//     const res = await fetch(`https://www.omdbapi.com/?s=${movieTitle}&apikey=7e07b9f6`);
 //     const data = await res.json();
-//     console.log(data)
+//     if(!res.ok) {
+//         messageErrorNode.classList.remove('hidden')
+//     } else {
+//         showMovies(data.Search)
+//     }
+    
 // }
 
 // function showMovieInfo(movies) { 
@@ -75,82 +123,13 @@ function showMovies(movies){
 
 // getMovieCard(movieId)
 
-// // чистим инпут и возвращаем  фокус 
-// function clearAndFocusInput() { 
-//     movieTitle.value = '';
-//     movieTitle.focus();
-// }
+// чистим инпут и возвращаем  фокус 
+function clearAndFocusInput() { 
+    movieTitle.value = '';
+    movieTitle.focus();
+}
 
 
-//----------------------------------------------------------
-// константы из HTML
-// const inputNode = document.getElementById("search__input");
-// const searchList = document.getElementById("search__list");
-// const resultNode = document.getElementById("result__movie-list");
-// const adviceNode = document.getElementById("advice");
-
-
-// ищем в базе API фильм по названию
-// async function loadMovies(movieTitle) {
-//     const url = `https://www.omdbapi.com/?s=${movieTitle}&page=1&apikey=57e731e0`;
-//     const res = await fetch(`${url}`);
-//     const data = await res.json();
-//     // проверка, что ответ получен
-//     if (data.Response === "True") {
-//       showMovies(data.Search);
-//       adviceNode.classList.add("advice__hide");
-//     } else {
-//       searchList.classList.add("search__list-hide");
-//       adviceNode.classList.remove("advice__hide");
-//     }
-//   }
-  //--------------------------------------------------------------------
-//   // поиск и скрытие списка
-//   function findMovies() {
-//     let movieTitle = inputNode.value.trim();
-//     // если введен хотя бы 1 знак(кроме только пробелов) в инпут
-//     // будет показан список фильмов на основе введенных знаков
-//     if (movieTitle.length > 0) {
-//       searchList.classList.remove("search__list-hide");
-//       loadMovies(movieTitle);
-//     } else {
-//       // если пусто в инпуте, то список скроется
-//       searchList.classList.add("search__list-hide");
-//       adviceNode.classList.add("advice__hide");
-//     }
-//   }
-    //--------------------------------------------------------------------
-//   // отображаем фильмы, подходящие по названию
-//   function showMovies(movies) {
-//     searchList.innerHTML = "";
-//     // coздаем блок со списком фильмов
-//     for (i = 0; i < movies.length; i++) {
-//       let searchListMovie = document.createElement("div");
-//       // даём каждому элементу внутри списка(фильму)
-//       // id соответствующий id с API
-//       searchListMovie.dataset.id = movies[i].imdbID;
-//       searchListMovie.classList.add("search__list-movie");
-//       // проверяем на наличие постера у фильма
-//       if (movies[i].Poster !== "N/A") {
-//         // если есть, то подгружаем постер с API
-//         moviePoster = movies[i].Poster;
-//       } else {
-//         // если нет, то подгружаем нашу картинку
-//         moviePoster = "resources/no-img.png";
-//       }
-//       // записываем HTML код для каждого элемента списка
-//       searchListMovie.innerHTML = `
-//         <div class="search__movie-thumbnail">
-//           <img src="${moviePoster}"/>
-//         </div>
-//         <div class="search__movie-info">
-//           <h3>${movies[i].Title}</h3>
-//           <p>${movies[i].Year}</p>
-//         </div>
-//       `;
-//       // добавляем элемент в наш выпадающий список
-//       searchList.appendChild(searchListMovie);
-//     }
 //     loadMovieInfo();
 //   }
   

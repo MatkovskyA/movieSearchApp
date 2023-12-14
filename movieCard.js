@@ -1,10 +1,11 @@
-// let movieId = movie.imdbID
 
-// async function getMovieCard(id) {
+
+
+// async function getMovieCard() {
 //     const res = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=7e07b9f6`);
 //     const data = await res.json();
-//     console.log(data)
+//     console.log(res)
 // }
 
-// getMovieCard(movieId)
+// getMovieCard()
 
