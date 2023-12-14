@@ -22,7 +22,7 @@ async function findMovies(movieTitle) {
 
 
 //получаем вводимые данные из инпута и отправляем его в поиск на сервер
-function searchMovie(e) { 
+function searchMovie() { 
     let movieTitle = inputNode.value.trim();
     if(!movieTitle) {
         return messageErrorNode.classList.remove('hidden')
@@ -46,28 +46,43 @@ function showMovies(movies){
             movieImg = movie.Poster
         }
         moviesList += `
-        <li class='list-style'>
+        <li>
+            <a href="movie.html?id=${movie.imdbID}" class='list-style'>
                 <img src='${movie.Poster}' class='movie-img-style'</img>
                 <div class="movie-content">
                     <h1 class='movie-title-style'>${movie.Title}</h1>
                     <p>${movie.Type}</p>
-                    <p>${movie.Year}</p>
+                    <p>Год выпуска: ${movie.Year}</p>
                 </div>
+            </a>
         </li>
         `
     })
     ulList.innerHTML = moviesList;
 }
+//-------------------------------------------------------
+// ДОДЕЛАТЬ - ОСТАНОВИЛСЯ НА ПОЛУЧЕНИИ ID ФИЛЬМА!!!
 
-// чистим инпут и возвращаем  фокус 
-function clearAndFocusInput() { 
-    movieTitle.value = '';
-    movieTitle.focus();
-}
+// async function getMovieCard(id) {
+//     const res = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=7e07b9f6`);
+//     const data = await res.json();
+//     console.log(data)
+// }
+
+// function showMovieInfo(movies) { 
+//     let movieId = movie.imdbID
+// }
+
+// getMovieCard(movieId)
+
+// // чистим инпут и возвращаем  фокус 
+// function clearAndFocusInput() { 
+//     movieTitle.value = '';
+//     movieTitle.focus();
+// }
 
 
-
-
+//----------------------------------------------------------
 // константы из HTML
 // const inputNode = document.getElementById("search__input");
 // const searchList = document.getElementById("search__list");
